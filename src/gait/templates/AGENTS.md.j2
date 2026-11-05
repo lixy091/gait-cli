@@ -1,0 +1,10 @@
+# Gait 三阶段迭代约束
+
+- `.gait/project.yaml`、`.gait/tasks-index.yaml`、`.gait/tasks/*/state.yaml` 是 Gait 状态；状态文件只能由 `gait` CLI 修改，禁止 Agent 或业务代码手工编辑。
+- 阶段一 `requirement-design`：先检查项目上下文并梳理尚未明确的需求；一次只问一个澄清问题，逐项确认范围、预期行为、约束和验收标准，不得用自行假设代替澄清。
+- 在向用户复述需求理解并得到用户明确确认之前，不得创建需求设计文档或 OpenSpec artifacts，也不得启动 OpenSpec propose；确认后再写文档并生成 spec/design/tasks。阶段一不得修改业务代码。
+- 以上是需求澄清流程，不会切换 Codex 内置 Plan mode；需要该模式时由用户使用 `/plan`。
+- 阶段二 `coding`：按 tasks.md 逐项实现，每项代码与单测通过后方可记录完成；状态变更必须调用 `gait`。
+- 阶段三 `closing`：使用 `gait task close` 归档 OpenSpec change 并完成总结，不再改业务代码。
+- Agent 不可自动批准 gate；只有用户明确要求并亲自触发 `gait task gate --approve --approver "姓名"` 才能写审批记录。
+- 阶段推进默认需用户交互确认；无交互时必须显式 `gait task advance --yes`，不可自行推进。

@@ -1,0 +1,5 @@
+click>=8.1
+PyYAML>=6.0
+
+[dev]
+pytest>=8.0
